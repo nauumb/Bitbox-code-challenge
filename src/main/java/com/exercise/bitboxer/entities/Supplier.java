@@ -1,27 +1,36 @@
 package com.exercise.bitboxer.entities;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.sun.istack.NotNull;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Table(name = "supplier")
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Supplier {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "supplier_id_seq")
+    @SequenceGenerator(name = "supplier_id_seq",sequenceName = "supplier_id_seq")
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
+    @NotNull
     private String name;
 
-    @Column(name = "country")
+    @Column(name = "country", nullable = false)
+    @NotNull
     private String country;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "suppliers")
     private Set<Item> items;
 
 }
