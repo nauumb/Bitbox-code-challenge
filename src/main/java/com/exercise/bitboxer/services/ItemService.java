@@ -1,11 +1,18 @@
 package com.exercise.bitboxer.services;
 
-import com.exercise.bitboxer.entities.Item;
+import com.exercise.bitboxer.dto.ItemDTO;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public interface ItemService {
 
-    public void insertItem(Item item);
+     ResponseEntity<String> insertItem(ItemDTO itemDTO);
+     ResponseEntity<ItemDTO> findItemById(Long id);
+     ResponseEntity<List<ItemDTO>> findAllItems();
+     ResponseEntity<String> updateItem(ItemDTO itemDTO);
+
 }
 

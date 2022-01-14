@@ -1,23 +1,37 @@
 package com.exercise.bitboxer.controllers;
 
-import com.exercise.bitboxer.entities.Item;
+import com.exercise.bitboxer.dto.ItemDTO;
 import com.exercise.bitboxer.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
+@RequestMapping("/bitboxer/v1/")
 public class ItemController {
 
-    private final ItemService itemService;
-
     @Autowired
-    public ItemController(ItemService itemService){
-        this.itemService = itemService;
+    private ItemService itemService;
+
+    @PostMapping("/insertItem")
+    public ResponseEntity<String> insertItem(@RequestBody ItemDTO itemDTO){
+        return itemService.insertItem(itemDTO);
     }
 
-    @PostMapping("/bitboxer/v1/insertItem")
-    public void insertItem(Item item){
-        itemService.insertItem(item);
+    @PutMapping("/editItem")
+    public ResponseEntity<String> updateItem(ItemDTO itemDTO){
+        return itemService.updateItem(itemDTO);
+    }
+
+    @GetMapping("/item")
+    public ResponseEntity<ItemDTO> findItemById(Long id) {
+        return itemService.findItemById(id);
+    }
+
+    @GetMapping("/getAllItems")
+    public ResponseEntity<List<ItemDTO>> findAllItems() {
+        return itemService.findAllItems();
     }
 }
