@@ -1,4 +1,4 @@
-package com.exercise.bitboxer.entities;
+package com.exercise.bitboxer.model;
 
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
@@ -27,7 +27,7 @@ public class Item {
     @NotNull
     private Long id;
 
-    @Column(name="itemcode", nullable = false, updatable = false)
+    @Column(name="itemcode", nullable = false, updatable = false, length = 30, unique = true)
     @NotNull
     private Long itemCode;
 

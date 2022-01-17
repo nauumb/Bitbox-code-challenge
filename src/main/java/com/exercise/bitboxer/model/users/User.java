@@ -1,4 +1,4 @@
-package com.exercise.bitboxer.entities.users;
+package com.exercise.bitboxer.model.users;
 
 import lombok.Data;
 

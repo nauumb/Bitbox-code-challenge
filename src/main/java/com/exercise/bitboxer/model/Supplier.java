@@ -1,7 +1,5 @@
-package com.exercise.bitboxer.entities;
+package com.exercise.bitboxer.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.sun.istack.NotNull;
 import lombok.*;
 

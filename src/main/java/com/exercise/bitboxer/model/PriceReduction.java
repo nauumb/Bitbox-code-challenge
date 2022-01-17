@@ -1,4 +1,4 @@
-package com.exercise.bitboxer.entities;
+package com.exercise.bitboxer.model;
 
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
