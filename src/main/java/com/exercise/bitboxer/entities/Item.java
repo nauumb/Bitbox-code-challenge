@@ -1,11 +1,11 @@
 package com.exercise.bitboxer.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -21,13 +21,13 @@ import java.util.Set;
 public class Item {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_id_seq")
-    @SequenceGenerator(name = "item_id_seq",sequenceName = "item_id_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_id_gen")
+    @SequenceGenerator(name = "item_id_gen",sequenceName = "item_id_seq")
     @Column(name = "id", nullable = false)
     @NotNull
     private Long id;
 
-    @Column(name="itemcode", nullable = false)
+    @Column(name="itemcode", nullable = false, updatable = false)
     @NotNull
     private Long itemCode;
 
@@ -38,9 +38,11 @@ public class Item {
     @Column(name = "price")
     private BigDecimal price;
 
-    @Column(name = "status", columnDefinition = "boolean default true")
-    private Boolean itemStatus;
+    @Column(name = "status", nullable = false)
+    private Boolean status;
 
+    @CreationTimestamp
+    @Column(name ="created_date", updatable = false)
     private LocalDateTime createdDate;
 
     @ManyToMany
@@ -51,7 +53,13 @@ public class Item {
     )
     private Set<Supplier> suppliers;
 
-    @OneToMany(mappedBy = "item")
-    @JsonBackReference
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true)
+
     private Set<PriceReduction> priceReductions;
+
+    @PrePersist void preInsertItem(){
+        if(this.status == null) {
+            this.status = true;
+        }
+    }
 }

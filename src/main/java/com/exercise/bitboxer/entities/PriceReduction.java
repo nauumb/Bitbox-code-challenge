@@ -1,6 +1,5 @@
 package com.exercise.bitboxer.entities;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -24,6 +24,10 @@ public class PriceReduction {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(nullable = false)
+    @NotNull
+    private BigDecimal reducedPrice;
+
     @Column(name = "startdate", nullable = false)
     @NotNull
     private LocalDateTime startDate;
@@ -32,9 +36,8 @@ public class PriceReduction {
     @NotNull
     private LocalDateTime endDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
-    @JsonManagedReference
     private Item item;
 
 }
