@@ -1,7 +1,7 @@
 package com.exercise.bitboxer.services.impl;
 
 import com.exercise.bitboxer.dto.ItemDTO;
-import com.exercise.bitboxer.entities.Item;
+import com.exercise.bitboxer.model.Item;
 import com.exercise.bitboxer.repositories.ItemRepository;
 import com.exercise.bitboxer.services.ItemService;
 import org.hibernate.ObjectNotFoundException;
@@ -72,9 +72,7 @@ public class ItemServiceImpl implements ItemService {
                 throw new ObjectNotFoundException(ItemDTO.class, "Item with identifier" + id + "was not found.");
             }
 
-            ItemDTO itemDTO = modelMapper.map(item, ItemDTO.class);
-
-            return itemDTO;
+            return modelMapper.map(item, ItemDTO.class);
 
         } catch (HttpServerErrorException | HttpClientErrorException e){
             throw e;
@@ -91,12 +89,10 @@ public class ItemServiceImpl implements ItemService {
                 throw new ObjectNotFoundException(ItemDTO.class, "No items was found.");
             }
 
-            List<ItemDTO> itemsDTO = items
+            return items
                     .stream()
                     .map(item -> modelMapper.map(item, ItemDTO.class))
                     .collect(Collectors.toList());
-
-            return itemsDTO;
 
         } catch (HttpServerErrorException | HttpClientErrorException e){
             throw e;
