@@ -1,6 +1,6 @@
 package com.exercise.bitboxer.repositories;
 
-import com.exercise.bitboxer.entities.PriceReduction;
+import com.exercise.bitboxer.model.PriceReduction;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
