@@ -42,7 +42,7 @@ public class Item {
     private Boolean status;
 
     @CreationTimestamp
-    @Column(name ="created_date", updatable = false)
+    @Column(name ="created_date")
     private LocalDateTime createdDate;
 
     @ManyToMany
@@ -57,7 +57,7 @@ public class Item {
 
     private Set<PriceReduction> priceReductions;
 
-    @PrePersist void preInsertItem(){
+    @PrePersist void onPrePersist(){
         if(this.status == null) {
             this.status = true;
         }
