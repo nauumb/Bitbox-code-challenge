@@ -47,11 +47,11 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public void updateItem(ItemDTO itemDTO)  throws DataIntegrityViolationException {
 
-        Item item = modelMapper.map(itemDTO, Item.class);
-
-        if(item.getDescription() == null) {
+        if(itemDTO.getDescription() == null) {
             throw new DataIntegrityViolationException("Description was not provided.");
         }
+
+        Item item = modelMapper.map(itemDTO, Item.class);
 
         try {
             itemRepository.save(item);
