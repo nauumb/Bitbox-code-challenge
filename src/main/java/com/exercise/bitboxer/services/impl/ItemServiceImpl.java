@@ -47,7 +47,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public void updateItem(ItemDTO itemDTO)  throws DataIntegrityViolationException {
 
-        if(itemDTO.getDescription() == null) {
+        if(itemDTO.getDescription() == null || itemDTO.getDescription().isBlank()) {
             throw new DataIntegrityViolationException("Description was not provided.");
         }
 
