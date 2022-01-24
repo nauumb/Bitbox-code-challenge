@@ -26,7 +26,7 @@ public class ItemDTO implements Serializable {
 
     private  Boolean status;
 
-    @JsonFormat(shape= JsonFormat.Shape.STRING , pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @JsonFormat(shape= JsonFormat.Shape.STRING , pattern = "yyyy-MM-dd'T'HH:mm")
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private  LocalDateTime createdDate;
