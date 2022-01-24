@@ -1,6 +1,6 @@
 package com.exercise.bitboxer.services;
 
-import com.exercise.bitboxer.entities.Item;
+import com.exercise.bitboxer.model.Item;
 import com.exercise.bitboxer.repositories.ItemRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
