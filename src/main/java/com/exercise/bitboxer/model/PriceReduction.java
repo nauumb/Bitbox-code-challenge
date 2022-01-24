@@ -35,9 +35,4 @@ public class PriceReduction {
     @Column(name = "enddate", nullable = false)
     @NotNull
     private LocalDateTime endDate;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "item_id")
-    private Item item;
-
 }

@@ -4,6 +4,7 @@ import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -29,6 +30,6 @@ public class Supplier {
     private String country;
 
     @ManyToMany(mappedBy = "suppliers")
-    private Set<Item> items;
+    private Set<Item> items = new HashSet<>();
 
 }

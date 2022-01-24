@@ -10,10 +10,11 @@ import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "item", uniqueConstraints = {@UniqueConstraint(columnNames = {"itemcode"})})
+@Table(name = "item")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -51,10 +52,10 @@ public class Item {
             joinColumns = @JoinColumn(name = "item_id"),
             inverseJoinColumns = @JoinColumn(name = "supplier_id")
     )
-    private Set<Supplier> suppliers;
+    private Set<Supplier> suppliers = new HashSet<>();
 
-    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true)
-
+    @OneToMany(targetEntity=PriceReduction.class,cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, orphanRemoval = true)
     private Set<PriceReduction> priceReductions;
 
     @PrePersist void onPrePersist(){
