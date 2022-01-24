@@ -35,3 +35,5 @@ build/
 
 #data
 /data/
+data/bitboxerDB.mv.db
+data/bitboxerDB.trace.db
